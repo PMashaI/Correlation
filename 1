@@ -1,0 +1,21 @@
+A = xlsread('C:\Dates for Matlab2003-7MM2.xls', 'C1:C4620');
+n=60
+m=77
+
+B = reshape(A, n, m);
+
+logret = price2ret(B);
+C = corr(logret);
+%C= corr(B)
+
+%correlation coefficient
+a = triu(C,1);
+a = a(:);
+aa = a(a~=0);
+
+%t = -0.5:0.01:0.8;
+[f,t,w] = ksdensity(aa); 
+plot(t,f, '-k'); 
+mean(aa)
+std(aa)
+w
